@@ -1,0 +1,38 @@
+.cinema-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .square-box {
+    width: 50px; /* Set your desired width */
+    /* height: 50px; Set your desired height */
+    background-color: #3498db; /* Set your desired background color */
+    /* color: white; */
+    margin-right: 5px;
+    border-radius: 7px;
+    /* text-align: center; */
+    /* line-height: 100px; Center the text vertically */
+    font-size: 24px; /* Set your desired font size */
+  }
+  
+  .cinema-table th,
+  .cinema-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .cinema-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .cinema-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  

@@ -1,0 +1,14 @@
+.booked {
+  color:blue
+}
+
+.blur-seat {
+  /* filter: blur(5px); Adjust the blur intensity as needed */
+  background-color: darkgray;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.selected {
+  background-color: #adf1ad;
+}

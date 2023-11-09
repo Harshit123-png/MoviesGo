@@ -1,0 +1,36 @@
+<app-header (reloadth)="reloadth($event)"></app-header>
+<div class="col-12" style="background-color: #cebaff; color: white;">
+  <h1>{{showdata?.show_name}}</h1>
+  <div class="row">
+    <h6> <span class="badge badge-secondary">Action, Drama , period, (UA)</span></h6>
+  </div>
+  <div class="row">
+    <div class="square-box" *ngFor="let date of upcomingDates" (click)="todayDate(date)">
+      {{ date | date: 'dd' }}
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <div class="container">
+        <div *ngIf="isData">
+          <div class="row" *ngFor="let thdata of data ; let i = index" >
+            <div class="col-4">
+              {{thdata.theater_name}}
+            </div>
+            <div class="col-1" *ngFor="let time of thdata.timing">
+              <button type="button" class="btn btn-primary" style="background-color: #B799FF; border-color: #B799FF;"
+                (click)="getTime(time , thdata)">{{time.startTime}}</button>
+            </div>
+            <hr />
+          </div>
+        </div>
+        <div *ngIf="!isData" style="text-align: center; margin-top: 10%;">
+          <h1> Please select city</h1>
+          <img src="../../assets/pngwing.com (1).png" alt="Description of the image" style="width: 200px;">
+        </div>
+      </div>
+  </tbody>
+</table>

@@ -1,0 +1,25 @@
+<app-second-header></app-second-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <p style="margin-top: 25px;">classic:360</p>
+            <hr />
+            <p>A</p>
+            <div class="row">
+                <div class="col"
+                    *ngFor="let seat of Array.from({length:(seats && seats.length ?seats[0]?.seatNumber:0)});let index = index" (click)="toggleSeat(index)">
+                    <div id="div" [class.selected]="selectedSeats.includes(index)" [ngClass]="{'blur-seat': seatToBlur.includes(index)}" 
+                        style="height: 30px; width: 30px; border: 1px solid silver;
+                         border-radius: 5px;margin-bottom:
+                          15px; text-align: center; cursor: pointer;">
+                        {{index + 1}}
+                    </div>
+                </div>
+                <button class="btn btn-primary" *ngIf="selectedSeats.length > 0" (click)="bookSeat()">Book</button>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>

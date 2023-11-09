@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>
+            Recommended Movies
+        </h3>
+        <div class="col-3" *ngFor="let show of showData" (click)="singleMovi(show._id)" >
+            <img [src]="'http://localhost:5143/'+show.imagePath"
+                style="height: 305px;border-radius: 12px; width: 210px;">
+            <h4>{{show.show_name}}</h4>
+            <p style="color: grey;">Action/Drama</p>
+        </div>
+    </div>
+</div>
