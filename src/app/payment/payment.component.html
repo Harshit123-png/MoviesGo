@@ -1,7 +1,12 @@
 <app-header></app-header>
 <div class="row">
     <div class=""></div>
-    <div class="col-9">  
+    <div class="col-9">
+        <form (ngSubmit)="onSubmit()" [formGroup]="payform">
+        <input type="Number"  formControlName="seatNumber" >
+        <input type="Number"  formControlName="seatPrice"  >
+        <button class="btn btn-danger" type="submit">click</button>
+        </form>  
     </div>
     <div classs="col-3"></div>
 </div>

@@ -100,5 +100,30 @@ export class MoviesgoService {
     }
   )
   }
+  creatQr(
+    data:any,
+  ) {
+    return this.httpclient.post(
+      UrlModal._URL + '/th/creatQr',
+      data,
+      {
+        headers: new HttpHeaders({
+        }),
+      }
+    );
+  }
+
+  payTicket(
+    data: any,
+  ) {
+    return this.httpclient.post(
+      UrlModal._URL + '/th/payforseat',
+      data,
+      {
+        headers: new HttpHeaders({
+        }),
+      }
+    )
+  }
 
 }

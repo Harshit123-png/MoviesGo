@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild,ElementRef } from '@angular/core';
 import { MoviesgoService } from '../services/moviesgo.service';
 import { ActivatedRoute } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-seat-selection',
@@ -8,21 +9,25 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./seat-selection.component.css']
 })
 export class SeatSelectionComponent {
-  // seats: number[] = Array.from({ length: 24 }, (_, index) => index + 1);
   startTime: any;
   city: any;
   currentDate: any;
   thId: any;
+  ticketId:any
   seats: any;
   Array = Array;
   showId: any;
   curseat: any;
+  @ViewChild('openqrmodal',{static: false }) qref: any;
   date: any;
   Date: any;
+  qrCodeImage: string = '';
+  $: any;
+  bseatNumber: number[] = [] 
   seatdata: any;
   seatNumbers: any;
   selectedSeats: number[] = [];
-  seatToBlur: any;
+  seatToBlur: number[] = [];
 
   constructor(private moviesgoservice: MoviesgoService, private activroute: ActivatedRoute) { }
   ngOnInit() {
@@ -67,9 +72,8 @@ export class SeatSelectionComponent {
     }
     this.moviesgoservice.getTicket(payload).subscribe((res: any) => {
       console.log(res, "this is tickets for this theater");
-      this.seatdata = res; 
+      this.seatdata = res;
       const allSeatNumbers = this.seatdata.flatMap((seat:any) => seat.seatNumber);
-      // this.seatNumbers = this.seatdata.map((seat: { seatNumber: any; }) => seat.seatNumber.map((numberofseat:any)=> numberofseat));
       this.seatToBlur = allSeatNumbers;
       console.log(this.seatToBlur, "this seats for blur");
     });
@@ -88,7 +92,32 @@ export class SeatSelectionComponent {
     console.log(payload)
     this.moviesgoservice.bookTicket(payload).subscribe((res: any) => {
       console.log(res, "ticket booked successfully");
-      alert("successfully booked");
+      this.ticketId = res.savedTicket.ticketId;
+      this.bseatNumber = res.savedTicket.seatNumber
+      console.log(this.ticketId)
+      this.generateQr();
+      this.ngOnInit();
     })
+  }
+
+  generateQr(){
+    let payload = {
+      data: this.ticketId
+    }
+    this.moviesgoservice.creatQr(payload).subscribe((res:any)=>{
+      console.log(res);
+      this.qrCodeImage = res.QrCODE
+      $('#exampleModal').modal('show');
+    })
+    this.downloadQrcode();
+  }
+
+  downloadQrcode(){
+    const link = document.createElement('a');
+    link.href = this.qrCodeImage;
+    link.download = 'qr-code.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }

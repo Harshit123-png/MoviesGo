@@ -1,25 +1,54 @@
 <app-second-header></app-second-header>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <p style="margin-top: 25px;">classic:360</p>
-            <hr />
-            <p>A</p>
-            <div class="row">
-                <div class="col"
-                    *ngFor="let seat of Array.from({length:(seats && seats.length ?seats[0]?.seatNumber:0)});let index = index" (click)="toggleSeat(index)">
-                    <div id="div" [class.selected]="selectedSeats.includes(index)" [ngClass]="{'blur-seat': seatToBlur.includes(index)}" 
-                        style="height: 30px; width: 30px; border: 1px solid silver;
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <p style="margin-top: 25px;">classic:360</p>
+      <hr />
+      <p>A</p>
+      <div class="row">
+        <div class="col"
+          *ngFor="let seat of Array.from({length:(seats && seats.length ?seats[0]?.seatNumber:0)});let index = index"
+          (click)="toggleSeat(index)">
+          <div id="div" [class.selected]="selectedSeats.includes(index)"
+            [ngClass]="{'blur-seat': seatToBlur.includes(index)}" style="height: 30px; width: 30px; border: 1px solid silver;
                          border-radius: 5px;margin-bottom:
                           15px; text-align: center; cursor: pointer;">
-                        {{index + 1}}
-                    </div>
-                </div>
-                <button class="btn btn-primary" *ngIf="selectedSeats.length > 0" (click)="bookSeat()">Book</button>
-            </div>
+            {{index + 1}}
+          </div>
         </div>
-        <div class="col-3"></div>
+        <button class="btn btn-primary" *ngIf="selectedSeats.length > 0" (click)="bookSeat()">Book</button>
+      </div>
     </div>
+    <div class="col-3"></div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img [src]="qrCodeImage" alt="QR Code">
+          <h1>Successfully Booked </h1>
+          <div class="row">
+            <div class="col-3">
+              <p>Seat Number</p>
+            </div>
+            <div class="col-9">
+              <div class="row">
+                <div class="col-1" *ngFor="let tic of bseatNumber">
+                  <p >{{tic+1}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
